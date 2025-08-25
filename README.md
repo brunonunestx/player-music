@@ -1,52 +1,46 @@
-# Turborepo starter
-
-This Turborepo starter is maintained by the Turborepo core team.
-
-## Using this example
-
-Run the following command:
-
-```sh
-npx create-turbo@latest
-```
-
-## What's inside?
-
-This Turborepo includes the following packages/apps:
-
-### Apps and Packages
-
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
-
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
-
-### Utilities
-
-This Turborepo has some additional tools already setup for you:
-
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
-
-### Build
-
-To build all apps and packages, run the following command:
-
-```
-cd my-turborepo
-
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo build
-
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo build
 yarn dlx turbo build
-pnpm exec turbo build
+
+# Player Music Monorepo
+
+Este repositório é um monorepo que contém a API (NestJS) e o front-end web (Next.js) do Player Music.
+
+## Como rodar o projeto
+
+1. Instale as dependências na raiz do projeto:
+
+```bash
+yarn
 ```
+
+2. Para rodar a API (NestJS):
+
+```bash
+yarn dev:api
+```
+
+3. Para rodar o front-end web (Next.js):
+
+```bash
+yarn dev:web
+```
+
+Você pode rodar ambos em terminais separados.
+
+---
+
+## Estrutura do monorepo
+
+- `apps/api`: API NestJS
+- `apps/web`: Front-end Next.js
+- `packages/`: Pacotes compartilhados (UI, configs, etc)
+
+---
+
+## Outras informações
+
+Este projeto utiliza [Turborepo](https://turborepo.org/) para gerenciar os workspaces e tarefas compartilhadas.
+
+Para mais comandos e detalhes, consulte a documentação do Turborepo ou os arquivos README de cada app/pacote.
 
 You can build a specific package by using a [filter](https://turborepo.com/docs/crafting-your-repository/running-tasks#using-filters):
 
