@@ -1,129 +1,225 @@
-yarn dlx turbo build
+# 🎵 Player Music
 
-# Player Music Monorepo
+Um monorepo moderno para aplicação de música com API NestJS e frontend React/Vite.
 
-Este repositório é um monorepo que contém a API (NestJS) e o front-end web (Next.js) do Player Music.
+## 🚀 Stack Tecnológica
 
-## Como rodar o projeto
+### Backend (API)
 
-1. Instale as dependências na raiz do projeto:
+- **NestJS** - Framework Node.js
+- **Prisma** - ORM para banco de dados
+- **PostgreSQL** - Banco de dados
+- **Swagger** - Documentação da API
+
+### Frontend (Web)
+
+- **React** - Biblioteca UI
+- **Vite** - Build tool e dev server
+- **Tailwind CSS v4** - Framework CSS utilitário
+- **React Router** - Roteamento
+
+### DevOps & Tools
+
+- **Turborepo** - Monorepo management
+- **TypeScript** - Tipagem estática
+- **ESLint** - Linting
+- **Prettier** - Formatação de código
+
+## 📋 Pré-requisitos
+
+- **Node.js** >= 18
+- **Yarn** (Package manager)
+- **PostgreSQL** (para a API)
+
+## 🔧 Configuração do Ambiente
+
+### 1. Clone o repositório
 
 ```bash
-yarn
+git clone <repository-url>
+cd player-music
 ```
 
-2. Para rodar a API (NestJS):
+### 2. Instale as dependências
 
 ```bash
+yarn install
+```
+
+### 3. Configure o banco de dados (API)
+
+```bash
+# Copie o arquivo de exemplo
+cp apps/api/.env.example apps/api/.env
+
+# Edite o arquivo .env com suas configurações
+# DATABASE_URL="postgresql://username:password@localhost:5432/player_music"
+# API_URL="http://localhost"
+# PORT=3000
+```
+
+### 4. Execute as migrações do banco
+
+```bash
+cd apps/api
+npx prisma migrate dev
+npx prisma generate
+```
+
+## 🚀 Como Rodar o Projeto
+
+### Desenvolvimento - Ambos os serviços
+
+```bash
+# Roda API e Web simultaneamente
+yarn dev
+```
+
+### Desenvolvimento - Serviços individuais
+
+```bash
+# Apenas a API (porta 3030)
 yarn dev:api
-```
 
-3. Para rodar o front-end web (Next.js):
-
-```bash
+# Apenas o Web (porta 5173)
 yarn dev:web
 ```
 
-Você pode rodar ambos em terminais separados.
+### Build para produção
+
+```bash
+# Build de todos os apps
+yarn build
+
+# Build de um app específico
+yarn build --filter=api
+yarn build --filter=web
+```
+
+## 📁 Estrutura do Projeto
+
+```
+monorepo/
+├── apps/
+│   ├── api/                 # Backend NestJS
+│   │   ├── src/
+│   │   ├── prisma/
+│   │   └── .env
+│   └── web/                 # Frontend React
+│       ├── src/
+│       ├── public/
+│       └── tailwind.config.js
+├── packages/
+│   ├── eslint-config/       # Configurações ESLint compartilhadas
+│   ├── typescript-config/   # Configurações TypeScript compartilhadas
+│   └── ui/                  # Componentes UI compartilhados
+└── turbo.json              # Configuração do Turborepo
+```
+
+## 🔗 URLs de Desenvolvimento
+
+- **API:** http://localhost:3000
+- **Swagger Docs:** http://localhost:3000/docs
+- **Web App:** http://localhost:5173
+
+## 🛠 Scripts Disponíveis
+
+```bash
+# Desenvolvimento
+yarn dev                    # Roda todos os apps
+yarn dev:api               # Roda apenas a API
+yarn dev:web               # Roda apenas o Web
+
+# Build
+yarn build                 # Build de todos os apps
+yarn build --filter=api    # Build apenas da API
+yarn build --filter=web    # Build apenas do Web
+
+# Linting e Formatação
+yarn lint                  # Executa linting em todos os apps
+yarn format                # Formata código com Prettier
+yarn check-types           # Verifica tipos TypeScript
+
+# Banco de dados (dentro de apps/api)
+npx prisma migrate dev     # Executa migrações
+npx prisma generate        # Gera o cliente Prisma
+npx prisma studio          # Interface visual do banco
+```
+
+## 📊 Banco de Dados
+
+Este projeto utiliza **PostgreSQL** com **Prisma** como ORM.
+
+### Comandos úteis:
+
+```bash
+cd apps/api
+
+# Criar nova migração
+npx prisma migrate dev --name nome_da_migracao
+
+# Resetar banco (cuidado em produção!)
+npx prisma migrate reset
+
+# Visualizar dados
+npx prisma studio
+```
+
+## 🎨 Estilização
+
+O projeto utiliza **Tailwind CSS v4** para estilização. As configurações estão em:
+
+- `apps/web/postcss.config.js`
+
+### Exemplo de uso:
+
+```tsx
+<button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded">
+  Botão estilizado
+</button>
+```
+
+## 📚 Documentação da API
+
+A documentação da API está disponível via Swagger em:
+**http://localhost:3000/docs** (quando a API estiver rodando)
+
+## 🔄 Fluxo de Desenvolvimento
+
+1. **Clone** o repositório
+2. **Instale** dependências com `yarn install`
+3. **Configure** as variáveis de ambiente
+4. **Execute** migrações do banco
+5. **Inicie** o desenvolvimento com `yarn dev`
+6. **Desenvolva** suas features
+7. **Teste** e **commit** suas alterações
+
+## 🚀 Deploy
+
+### API (Backend)
+
+1. Configure as variáveis de ambiente de produção
+2. Execute `yarn build --filter=api`
+3. Deploy conforme sua plataforma (Heroku, Railway, etc.)
+
+### Web (Frontend)
+
+1. Execute `yarn build --filter=web`
+2. Deploy os arquivos da pasta `apps/web/dist`
+3. Configure seu servidor web (Vercel, Netlify, etc.)
+
+## 🤝 Contribuição
+
+1. Faça um fork do projeto
+2. Crie uma branch para sua feature (`git checkout -b feature/AmazingFeature`)
+3. Commit suas mudanças (`git commit -m 'Add some AmazingFeature'`)
+4. Push para a branch (`git push origin feature/AmazingFeature`)
+5. Abra um Pull Request
+
+## 📄 Licença
+
+Este projeto está sob a licença [MIT](LICENSE).
 
 ---
 
-## Estrutura do monorepo
-
-- `apps/api`: API NestJS
-- `apps/web`: Front-end Next.js
-- `packages/`: Pacotes compartilhados (UI, configs, etc)
-
----
-
-## Outras informações
-
-Este projeto utiliza [Turborepo](https://turborepo.org/) para gerenciar os workspaces e tarefas compartilhadas.
-
-Para mais comandos e detalhes, consulte a documentação do Turborepo ou os arquivos README de cada app/pacote.
-
-You can build a specific package by using a [filter](https://turborepo.com/docs/crafting-your-repository/running-tasks#using-filters):
-
-```
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo build --filter=docs
-
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo build --filter=docs
-yarn exec turbo build --filter=docs
-pnpm exec turbo build --filter=docs
-```
-
-### Develop
-
-To develop all apps and packages, run the following command:
-
-```
-cd my-turborepo
-
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo dev
-
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo dev
-yarn exec turbo dev
-pnpm exec turbo dev
-```
-
-You can develop a specific package by using a [filter](https://turborepo.com/docs/crafting-your-repository/running-tasks#using-filters):
-
-```
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo dev --filter=web
-
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo dev --filter=web
-yarn exec turbo dev --filter=web
-pnpm exec turbo dev --filter=web
-```
-
-### Remote Caching
-
-> [!TIP]
-> Vercel Remote Cache is free for all plans. Get started today at [vercel.com](https://vercel.com/signup?/signup?utm_source=remote-cache-sdk&utm_campaign=free_remote_cache).
-
-Turborepo can use a technique known as [Remote Caching](https://turborepo.com/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
-
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup?utm_source=turborepo-examples), then enter the following commands:
-
-```
-cd my-turborepo
-
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo login
-
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo login
-yarn exec turbo login
-pnpm exec turbo login
-```
-
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
-
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
-
-```
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo link
-
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo link
-yarn exec turbo link
-pnpm exec turbo link
-```
-
-## Useful Links
-
-Learn more about the power of Turborepo:
-
-- [Tasks](https://turborepo.com/docs/crafting-your-repository/running-tasks)
-- [Caching](https://turborepo.com/docs/crafting-your-repository/caching)
-- [Remote Caching](https://turborepo.com/docs/core-concepts/remote-caching)
-- [Filtering](https://turborepo.com/docs/crafting-your-repository/running-tasks#using-filters)
-- [Configuration Options](https://turborepo.com/docs/reference/configuration)
-- [CLI Usage](https://turborepo.com/docs/reference/command-line-reference)
+**Desenvolvido com ❤️ usando Turborepo, NestJS e React**
