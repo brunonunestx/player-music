@@ -1,5 +1,3 @@
-# 🎵 Player Music
-
 Um monorepo moderno para aplicação de música com API NestJS e frontend React/Vite.
 
 ## 🚀 Stack Tecnológica
